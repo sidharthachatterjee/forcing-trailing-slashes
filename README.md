@@ -4,7 +4,7 @@ This example show how to force trailing slashes using a custom `_worker.js` file
 
 To run this locally, run `npm run build && npm run export` which will build and export your pages into the `out` folder and serve them using `wrangler` by running `npx wrangler pages dev ./out`.
 
-# Behaviour
+## Behaviour
 
 For all requests that are:
 
@@ -15,6 +15,6 @@ We add a trailing slash and redirect the request.
 
 For requests to URLs that include a trailing slash, we opt out of the default behaviour (which strips them) and serve the page as is.
 
-# Usage
+## Usage
 
 Copy the `_worker.js` file in your project's `public` directory and it should work as is.

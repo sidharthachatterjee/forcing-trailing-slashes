@@ -18,7 +18,10 @@ export default {
           request
         );
 
-        if (assetEntry.status === 200) {
+        if (
+          assetEntry.status === 200 &&
+          assetEntry.headers.get("content-type").includes("text/html")
+        ) {
           return assetEntry;
         }
       }
@@ -34,7 +37,10 @@ export default {
           request
         );
 
-        if (assetEntry.status === 200) {
+        if (
+          assetEntry.status === 200 &&
+          assetEntry.headers.get("content-type").includes("text/html")
+        ) {
           return new Response(null, {
             // Temporary
             status: 302,
