@@ -15,7 +15,10 @@ export default {
           request
         );
 
-        if (assetEntry.status === 200) {
+        if (
+          assetEntry.status === 200 &&
+          assetEntry.headers.get("content-type").includes("text/html")
+        ) {
           return assetEntry;
         }
       }
