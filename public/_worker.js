@@ -2,7 +2,10 @@ export default {
   async fetch(request, env) {
     let { pathname, origin, search } = new URL(request.url);
 
-    if (pathname !== "/") {
+    // Ignores root or any pages which end with an extension other than .html
+    const REGEX = /\/[a-zA-Z-]+(\.html|\/)?$/i;
+
+    if (pathname.match(REGEX)) {
       // Serve requests with trailing slashes
       if (pathname.endsWith("/")) {
         const assetUrlWithoutTrailingSlash = new URL(
@@ -15,10 +18,7 @@ export default {
           request
         );
 
-        if (
-          assetEntry.status === 200 &&
-          assetEntry.headers.get("content-type").includes("text/html")
-        ) {
+        if (assetEntry.status === 200) {
           return assetEntry;
         }
       }
@@ -34,15 +34,12 @@ export default {
           request
         );
 
-        if (
-          assetEntry.status === 200 &&
-          assetEntry.headers.get("content-type").includes("text/html")
-        ) {
+        if (assetEntry.status === 200) {
           return new Response(null, {
             // Temporary
             status: 302,
             headers: {
-              Location: assetUrlWithTrailingSlash,
+              Location: `${pathname}/${search}`,
             },
           });
         }
