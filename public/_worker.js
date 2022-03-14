@@ -31,9 +31,13 @@ export default {
           request
         );
 
-        if (assetEntry.status !== 404) {
+        if (
+          assetEntry.status === 200 &&
+          assetEntry.headers.get("content-type").includes("text/html")
+        ) {
           return new Response(null, {
-            status: 301,
+            // Temporary
+            status: 302,
             headers: {
               Location: assetUrlWithTrailingSlash,
             },
