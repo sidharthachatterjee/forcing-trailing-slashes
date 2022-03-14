@@ -1,21 +1,20 @@
-# Static export example
+# Forcing Trailing Slashes
 
-This example show how to export to static HTML files your Next.js application fetching data from an API to generate a dynamic list of pages.
+This example show how to force trailing slashes using a custom `_worker.js` file in your Cloudflare Pages project.
 
-When trying to run `npm start` it will build and export your pages into the `out` folder and serve them on `localhost:5000`.
+To run this locally, run `npm run build && npm run export` which will build and export your pages into the `out` folder and serve them using `wrangler` by running `npx wrangler pages dev ./out`.
 
-## Preview
+# Behaviour
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+For all requests that are:
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-static-export)
+- not `/`
+- not a URL serving a non HTML file e.g. `/_next/static/8TsXBbcStaPyWVGs7Mt1j/_buildManifest.js`
 
-## How to use
+We add a trailing slash and redirect the request.
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+For requests to URLs that include a trailing slash, we opt out of the default behaviour (which strips them) and serve the page as is.
 
-```bash
-npx create-next-app --example with-static-export with-static-export-app
-# or
-yarn create next-app --example with-static-export with-static-export-app
-```
+# Usage
+
+Copy the `_worker.js` file in your project's `public` directory and it should work as is.
