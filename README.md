@@ -17,4 +17,4 @@ For requests to URLs that include a trailing slash, we opt out of the default be
 
 ## Usage
 
-Copy the `public/_worker.js` file into your project's `public` directory and it should work as is.
+Copy the `public/_worker.js` file into your project's build output directory and it should work as is.
