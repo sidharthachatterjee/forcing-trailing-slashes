@@ -3,7 +3,7 @@ export default {
     let { pathname, origin, search } = new URL(request.url);
 
     // Ignores root or any pages which end with an extension other than .html
-    const REGEX = /\/[a-zA-Z-]+(\.html|\/)?$/i;
+    const REGEX = /\/[a-zA-Z0-9-]+(\.html|\/)?$/i;
 
     if (pathname.match(REGEX)) {
       // Serve requests with trailing slashes
