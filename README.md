@@ -13,8 +13,6 @@ For all requests that are:
 
 We add a trailing slash and redirect the request.
 
-For requests to URLs that include a trailing slash, we opt out of the default behaviour (which strips them) and serve the page as is.
-
 ## Usage
 
 Copy the `public/_worker.js` file into your project's build output directory and it should work as is.
